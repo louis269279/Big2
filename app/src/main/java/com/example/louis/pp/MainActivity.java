@@ -42,6 +42,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Bundle bundle = getIntent().getExtras();
+        playerTypes = new int[g.NUM_PLAYERS];
+        playerTypes[0] = bundle.getInt("type1");
+        playerTypes[1] = bundle.getInt("type2");
+        playerTypes[2] = bundle.getInt("type3");
+        playerTypes[3] = bundle.getInt("type4");
+
         g = new Game(bundle.getString("name1"), bundle.getString("name2"),
                 bundle.getString("name3"), bundle.getString("name4"));
         selected = new boolean[13];
@@ -59,19 +65,12 @@ public class MainActivity extends Activity {
         findViewById(R.id.lm3).setOnClickListener(ocl);
         findViewById(R.id.lm4).setOnClickListener(ocl);
 
-        playerTypes = new int[g.NUM_PLAYERS];
-        playerTypes[0] = bundle.getInt("type1");
-        playerTypes[1] = bundle.getInt("type2");
-        playerTypes[2] = bundle.getInt("type3");
-        playerTypes[3] = bundle.getInt("type4");
-
-
         changeTurns();
     }
 
     public void changeTurns() {
 
-        while (playerTypes[g.whoseTurn] != 0) {
+        /*while (playerTypes[g.whoseTurn] != 0) {
             // ai make move.
             if (playerTypes[g.whoseTurn] == EASY) {
 
@@ -80,6 +79,12 @@ public class MainActivity extends Activity {
             } else if (playerTypes[g.whoseTurn] == HARD) {
 
             }
+        }*/
+        while (playerTypes[g.whoseTurn] == 1) {
+            g.numPasses++;
+            g.prevPlay.add(0, new ArrayList<Integer>());
+            if (g.numPasses == g.NUM_PLAYERS - 1) g.prevPlay.clear();
+            g.whoseTurn = (g.whoseTurn + 1) % g.NUM_PLAYERS;
         }
         Intent intent = new Intent(MainActivity.this, ChangeTurns.class);
         intent.putExtra("whoseTurn", g.whoseTurn);
@@ -91,6 +96,22 @@ public class MainActivity extends Activity {
             intent.putExtra(("freeGo"), false);
         }
         startActivity(intent);
+    }
+
+    private void makeMoveEasy() {
+        if (g.lastMove().size() == 1 || g.lastMove().size() == 2 || g.lastMove().size() == 3) {
+            int freq[] = new int[13];
+            for (int i: g.hands[g.whoseTurn]) {
+                freq[i % 13]++;
+            }
+            for (int i: freq) {
+                if (i == g.hands[g.whoseTurn].size()) {
+                    //g.makeMove()
+                }
+            }
+        } else if (g.lastMove().size() == 5) {
+
+        }
     }
 
     public void displayScoreBoard(View view) {
@@ -588,6 +609,7 @@ public class MainActivity extends Activity {
             while (cardsDealt != SIZE_OF_DECK) {
                 int cardNum = r.nextInt(SIZE_OF_DECK);
                 if (dealt[cardNum] == false) {
+                    if (firstMove && cardNum == THREE_OF_DIAMONDS && playerTypes[cardsDealt % NUM_PLAYERS] == 1) continue;
                     hands[cardsDealt % NUM_PLAYERS].add(cardNum);
                     if (firstMove && cardNum == THREE_OF_DIAMONDS) whoseTurn = cardsDealt % NUM_PLAYERS;
                     cardsDealt++;

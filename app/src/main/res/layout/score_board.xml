@@ -64,7 +64,8 @@
         android:layout_marginStart="72dp"
         android:progressTint="#000000"
         android:progress="0"
-        android:progressBackgroundTint="#ffffff" />
+        android:progressBackgroundTint="#ffffff"
+        />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"

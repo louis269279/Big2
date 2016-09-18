@@ -34,11 +34,28 @@ public class FirstScreen extends Activity {
 
     public void startGame (View view) {
 
+        int numPlaying = 0;
+        if (playerType[0] == 0) numPlaying++;
+        if (playerType[1] == 0) numPlaying++;
+        if (playerType[2] == 0) numPlaying++;
+        if (playerType[3] == 0) numPlaying++;
+
         if (playerType[0] != 0 && playerType[1] != 0 &&
                 playerType[2] != 0 && playerType[3] != 0) {
             new AlertDialog.Builder(this)
                     .setTitle("Error!")
-                    .setMessage("At least one person must be a player!")
+                    //.setMessage("At least one person must be a player!")
+                    .setMessage("There must be at least two players!")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        } else if (numPlaying == 1) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Error!")
+                    .setMessage("There must be at least two players!")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
@@ -68,7 +85,26 @@ public class FirstScreen extends Activity {
     }
 
     public void changePlayerType (View view) {
+
         switch (view.getId()) {
+            case R.id.playerType0:
+                playerType[0] = (playerType[0] + 1) % 2;
+                changeIcon((ImageButton) view, playerType[0]);
+                break;
+            case R.id.playerType1:
+                playerType[1] = (playerType[1] + 1) % 2;
+                changeIcon((ImageButton) view, playerType[1]);
+                break;
+            case R.id.playerType2:
+                playerType[2] = (playerType[2] + 1) % 2;
+                changeIcon((ImageButton) view, playerType[2]);
+                break;
+            case R.id.playerType3:
+                playerType[3] = (playerType[3] + 1) % 2;
+                changeIcon((ImageButton) view, playerType[3]);
+                break;
+        }
+        /*switch (view.getId()) {
             case R.id.playerType0:
                 playerType[0] = (playerType[0]+1)%4;
                 changeIcon((ImageButton) view, playerType[0]);
@@ -85,11 +121,17 @@ public class FirstScreen extends Activity {
                 playerType[3] = (playerType[3]+1)%4;
                 changeIcon((ImageButton) view, playerType[3]);
                 break;
-        }
+        }*/
     }
 
     private void changeIcon(ImageButton ib, int type) {
+
         if (type == 0) {
+            ib.setImageResource(R.drawable.player);
+        } else if (type == 1) {
+            ib.setImageResource(R.drawable.none);
+        }
+        /*if (type == 0) {
             ib.setImageResource(R.drawable.player);
         } else if (type == 1) {
             ib.setImageResource(R.drawable.easy);
@@ -97,7 +139,7 @@ public class FirstScreen extends Activity {
             ib.setImageResource(R.drawable.med);
         } else {
             ib.setImageResource(R.drawable.hard);
-        }
+        }*/
     }
 
     public void hideKeyboard(View view) {
