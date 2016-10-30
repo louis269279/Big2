@@ -86,21 +86,22 @@ public class FirstScreen extends Activity {
 
     public void changePlayerType (View view) {
 
+        int numPlayerTypes = 2;
         switch (view.getId()) {
             case R.id.playerType0:
-                playerType[0] = (playerType[0] + 1) % 2;
+                playerType[0] = (playerType[0] + 1) % numPlayerTypes;
                 changeIcon((ImageButton) view, playerType[0]);
                 break;
             case R.id.playerType1:
-                playerType[1] = (playerType[1] + 1) % 2;
+                playerType[1] = (playerType[1] + 1) % numPlayerTypes;
                 changeIcon((ImageButton) view, playerType[1]);
                 break;
             case R.id.playerType2:
-                playerType[2] = (playerType[2] + 1) % 2;
+                playerType[2] = (playerType[2] + 1) % numPlayerTypes;
                 changeIcon((ImageButton) view, playerType[2]);
                 break;
             case R.id.playerType3:
-                playerType[3] = (playerType[3] + 1) % 2;
+                playerType[3] = (playerType[3] + 1) % numPlayerTypes;
                 changeIcon((ImageButton) view, playerType[3]);
                 break;
         }

@@ -90,7 +90,7 @@
         android:background="#fffea7"
         android:clickable="true"
         android:onClick="startGame"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+        android:textSize="30dp" />
 
     <ImageButton
         android:layout_width="41dp"
