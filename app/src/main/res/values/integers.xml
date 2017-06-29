@@ -1,0 +1,5 @@
+<resources>
+    <integer name="player">0</integer>
+    <integer name="computer">1</integer>
+    <integer name="none">2</integer>
+</resources>

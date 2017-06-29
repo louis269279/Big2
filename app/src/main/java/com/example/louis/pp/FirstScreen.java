@@ -115,11 +115,11 @@ public class FirstScreen extends Activity {
 
     private void changeIcon(ImageButton ib, int type) {
 
-        if (type == 0) {
+        if (type == R.integer.player) {
             ib.setImageResource(R.drawable.player);
-        } else if (type == 1) {
+        } else if (type == R.integer.computer) {
             ib.setImageResource(R.drawable.easy);
-        } else if (type == 2) {
+        } else if (type == R.integer.none) {
             ib.setImageResource(R.drawable.none);
         }
         /*if (type == 0) {

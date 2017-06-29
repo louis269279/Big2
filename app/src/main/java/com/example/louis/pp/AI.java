@@ -3,6 +3,7 @@ package com.example.louis.pp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -141,6 +142,18 @@ public class AI {
             pairCombinations(num, nextMoves, 1, 4, g);
 
         }
+
+        if (g.firstMove) {
+            System.out.println("Before: " + Arrays.toString(nextMoves.toArray()));
+            // remove all moves that don't contain diamond 3
+            Iterator<ArrayList<Integer>> it = nextMoves.iterator();
+            while (it.hasNext()) {
+                if (it.next().contains(Game.THREE_OF_DIAMONDS) == false) {
+                    it.remove();
+                }
+            }
+            System.out.println("After: " + Arrays.toString(nextMoves.toArray()));
+        }
         return nextMoves;
     }
 
@@ -173,7 +186,7 @@ public class AI {
 
         }
 
-        // 
+        //
         return strength;
     }
 

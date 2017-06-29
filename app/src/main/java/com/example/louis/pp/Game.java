@@ -313,7 +313,7 @@ public class Game {
         while (cardsDealt != SIZE_OF_DECK) {
             int cardNum = r.nextInt(SIZE_OF_DECK);
             if (dealt[cardNum] == false) {
-                if (firstMove && cardNum == THREE_OF_DIAMONDS && ma.playerTypes[cardsDealt % NUM_PLAYERS] == 2) continue;
+                if (firstMove && cardNum == THREE_OF_DIAMONDS && ma.playerTypes[cardsDealt % NUM_PLAYERS] == R.integer.none) continue;
                 hands[cardsDealt % NUM_PLAYERS].add(cardNum);
                 if (firstMove && cardNum == THREE_OF_DIAMONDS) whoseTurn = cardsDealt % NUM_PLAYERS;
                 cardsDealt++;
@@ -347,6 +347,8 @@ public class Game {
 
     public void addPoints() {
         for (int i = 0; i < NUM_PLAYERS; i++) {
+            if (ma.playerTypes[i] == R.integer.none) continue;
+
             if (hands[i].size() <= 7) {
                 playerPoints[i] += hands[i].size();
             } else if (hands[i].size() <= 9) {
