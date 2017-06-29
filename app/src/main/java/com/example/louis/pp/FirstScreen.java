@@ -40,22 +40,10 @@ public class FirstScreen extends Activity {
         if (playerType[2] == 0) numPlaying++;
         if (playerType[3] == 0) numPlaying++;
 
-        if (playerType[0] != 0 && playerType[1] != 0 &&
-                playerType[2] != 0 && playerType[3] != 0) {
+        if (numPlaying == 0) {
             new AlertDialog.Builder(this)
                     .setTitle("Error!")
-                    //.setMessage("At least one person must be a player!")
-                    .setMessage("There must be at least two players!")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-        } else if (numPlaying == 1) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Error!")
-                    .setMessage("There must be at least two players!")
+                    .setMessage("There must be at least one player!")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
@@ -86,7 +74,7 @@ public class FirstScreen extends Activity {
 
     public void changePlayerType (View view) {
 
-        int numPlayerTypes = 2;
+        int numPlayerTypes = 3;
         switch (view.getId()) {
             case R.id.playerType0:
                 playerType[0] = (playerType[0] + 1) % numPlayerTypes;
@@ -130,6 +118,8 @@ public class FirstScreen extends Activity {
         if (type == 0) {
             ib.setImageResource(R.drawable.player);
         } else if (type == 1) {
+            ib.setImageResource(R.drawable.easy);
+        } else if (type == 2) {
             ib.setImageResource(R.drawable.none);
         }
         /*if (type == 0) {
